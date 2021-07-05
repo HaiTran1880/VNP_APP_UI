@@ -1,26 +1,10 @@
-import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import React from 'react';
+import StackNavigation from './src/routers/StackNavigation';
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-    };
-  }
-
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text> App </Text>
-      </View>
-    );
-  }
+const App = () => {
+  return (
+    <StackNavigation />
+  )
 }
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
-  }
-})
+
 export default App;
