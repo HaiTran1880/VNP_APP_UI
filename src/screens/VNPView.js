@@ -3,16 +3,14 @@ import {
     Text,
     View,
     StyleSheet,
-   ScrollView,
+    ScrollView,
     SafeAreaView,
     Image,
     TouchableOpacity,
     Modal,
-    Dimensions
+
 } from 'react-native';
 import image from '../assets/image';
-const WIDTH = Dimensions.get('window').width;
-const HEIGHT = Dimensions.get('window').height;
 const SEVERS=[
     {
         svname:'Automatic',
@@ -55,7 +53,7 @@ const ModalSever = (props) => {
            animationType='slide'
            visible={props.isOpen}
            >
-               <View style={{width:'100%', height:'60%', alignItems:'center',backgroundColor:'#FFF', position:'absolute', bottom:0}}>
+               <View style={styles.containModal}>
                 <View style={{padding:20}}>
                     <Text>Pick your Sever</Text>
                 </View>
@@ -63,13 +61,13 @@ const ModalSever = (props) => {
                     {SEVERS.map((item,index)=>{
                        return(
                         <TouchableOpacity onPress={()=>props.onClose(index)}
-                        style={{marginTop:30, flexDirection:'row', justifyContent:'space-between',  width:'100%'}}>
-                        <View style={{flexDirection:'row', justifyContent:'center', alignItems:'center'}}>
+                        style={styles.containRow}>
+                        <View style={styles.row}>
                         <Image source={item.image}/>
                         <Text style={{marginLeft:20, fontSize:16}}>{item.svname}</Text>
                         </View>
-                        {props.isSelect ==index ? <View style={{width:30, height:30,borderRadius:50, backgroundColor:'#0094FC'}}/>:
-                        <View style={{width:30, height:30,borderRadius:50,borderWidth:0.5, borderColor:'gray'}}/>}
+                        {props.isSelect ==index ? <View style={styles.rowSelected}/>:
+                        <View style={styles.rowNotSelected}/>}
                     </TouchableOpacity>
                        )
                     })}
@@ -97,9 +95,9 @@ const VNPView = ({ navigation }) => {
                 {connected ?
                     <View>
                         <View style={styles.statusConnect}>
-                            <View style={{ flexDirection: 'row', width: 85, height: 15, alignItems: 'flex-end' }}>
-                                <Text style={{ color: '#8B959A', fontSize: 13, marginRight: 5.5 }}>Disonnected</Text>
-                                <View style={{ backgroundColor: '#8B959A', width: 8, height: 8, borderRadius: 10 }} />
+                            <View style={styles.containStatus}>
+                                <Text style={styles.txtStatus}>Disonnected</Text>
+                                <View style={styles.dot1} />
                             </View>
                         </View>
                         <Image style={{ marginVertical: 30 }}
@@ -112,9 +110,9 @@ const VNPView = ({ navigation }) => {
                     </View> :
                     <View>
                         <View style={styles.statusConnect}>
-                            <View style={{ flexDirection: 'row', width: 85, height: 15, alignItems: 'flex-end' }}>
-                                <Text style={{ color: '#8B959A', fontSize: 13, marginRight: 5.5 }}>Connected</Text>
-                                <View style={{ backgroundColor: '#5ED40A', width: 8, height: 8, borderRadius: 10 }} />
+                            <View style={styles.containStatus}>
+                                <Text style={styles.txtStatus}>Connected</Text>
+                                <View style={styles.dot2} />
                             </View>
                         </View>
                         <Image style={{ marginVertical: 30 }}
@@ -128,7 +126,7 @@ const VNPView = ({ navigation }) => {
             </View>
             <TouchableOpacity onPress={openModal}
                 style={styles.bottom}>
-                <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+                <View style={styles.openModal}>
                     <Image style={{ marginRight: 20 }}
                         source={SEVERS[selected].image} />
                     <Text style={{ fontSize: 16 }}>{SEVERS[selected].svname}</Text>
@@ -193,6 +191,67 @@ const styles = StyleSheet.create({
         shadowRadius: 4.65,
         
         elevation: 6,
+    },
+    containModal:{
+        width:'100%', 
+        height:'60%', 
+        alignItems:'center',
+        backgroundColor:'#FFF', 
+        position:'absolute', 
+        bottom:0
+    },
+    row:{
+        flexDirection:'row', 
+        justifyContent:'center', 
+        alignItems:'center'
+    },
+    containRow:{
+        marginTop:30, 
+        flexDirection:'row', 
+        justifyContent:'space-between',  
+        width:'100%'
+    },
+    openModal:{ 
+        flex: 1, 
+        flexDirection: 'row', 
+        justifyContent: 'center', 
+        alignItems: 'center' 
+    },
+    rowSelected:{
+        width:30, 
+        height:30,
+        borderRadius:50, 
+        backgroundColor:'#0094FC'
+    },
+    rowNotSelected:{
+        width:30, 
+        height:30,
+        borderRadius:50,
+        borderWidth:0.5, 
+        borderColor:'gray'
+    },
+    containStatus:{ 
+        flexDirection: 'row', 
+        width: 85, 
+        height: 15, 
+        alignItems: 'flex-end' 
+    },
+    txtStatus:{ 
+        color: '#8B959A', 
+        fontSize: 13, 
+        marginRight: 5.5 
+    },
+    dot1:{ 
+        backgroundColor: '#8B959A', 
+        width: 8, 
+        height: 8, 
+        borderRadius: 10 
+    },
+    dot2:{ 
+        backgroundColor: '#5ED40A', 
+        width: 8, 
+        height: 8, 
+        borderRadius: 10 
     }
 });
 export default VNPView;

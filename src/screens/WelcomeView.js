@@ -75,7 +75,7 @@ const WelcomView = ({ navigation }) => {
     const scrollX= useRef(new Animated.Value(0)).current;
     return (
         <View style={styles.container}>
-           <View style={{width:'80%', height:'70%', justifyContent:'center', alignItems:'center'}}>
+           <View style={styles.containScrollView}>
            <Animated.ScrollView 
            horizontal={true} 
            showsHorizontalScrollIndicator={false}
@@ -83,19 +83,17 @@ const WelcomView = ({ navigation }) => {
            scrollEnabled
            decelerationRate={0}
            scrollEventThrottle={16}
-            onScroll={Animated.event([{nativeEvent:{contentOffset:{x:scrollX}}}],{useNativeDriver:false})}
+           onScroll={Animated.event([{nativeEvent:{contentOffset:{x:scrollX}}}],{useNativeDriver:false})}
            snapToAlignment='center'
            >
                {backgrounds.map(item=>
                <View style={{justifyContent:'space-between'}}>
-                   <Image style={{width:Dimensions.get('window').width*8/10, 
-                   height:'80%',
-                }}
-                   resizeMode={Platform.OS==='ios' ? 'contain' : 'contain'}
+                   <Image style={styles.img}
+                   resizeMode='contain'
                    source={item.img}/>
-                   <View style={{}}>
-                   <Text style={{textAlign:'center', fontSize:20, marginBottom:17, fontWeight:'600'}}>{item.title}</Text>
-                   <Text style={{fontSize:12, color:'gray', textAlign:'center'}}>{item.discription}</Text>
+                   <View>
+                   <Text style={styles.title}>{item.title}</Text>
+                   <Text style={styles.decription}>{item.discription}</Text>
                    </View>
                </View>
                )}
@@ -103,12 +101,12 @@ const WelcomView = ({ navigation }) => {
             </Animated.ScrollView>
            </View>
            
-            <View style={{flexDirection:'row', marginBottom:40, marginTop:27}}>
+            <View style={styles.containDots}>
                 <RenderDots scrollX={scrollX}/>
             </View>
             <TouchableOpacity onPress={()=>navigation.navigate('VNP')}
             style={styles.btn}>
-                <Text style={{color:'#FFF', fontSize:12 }}>GET STARTED</Text>
+                <Text style={styles.textBtn}>GET STARTED</Text>
             </TouchableOpacity>
         </View>
     )
@@ -124,6 +122,36 @@ const styles = StyleSheet.create({
         paddingHorizontal:50,
         borderRadius:20,
         backgroundColor:'#0094FC',
+    },
+    containScrollView:{
+        width:'80%', 
+        height:'70%', 
+        justifyContent:'center', 
+        alignItems:'center'
+    },
+    img:{
+        width:Dimensions.get('window').width*8/10, 
+        height:'80%',
+    },
+    title:{
+        fontSize:20, 
+        marginBottom:17, 
+        textAlign:'center', 
+        fontWeight:'600'
+    },
+    decription:{
+        fontSize:12, 
+        color:'gray', 
+        textAlign:'center'
+    },
+    containDots:{
+        flexDirection:'row', 
+        marginBottom:40, 
+        marginTop:27
+    },
+    textBtn:{
+        color:'#FFF', 
+        fontSize:12 
     }
 });
 export default WelcomView;
