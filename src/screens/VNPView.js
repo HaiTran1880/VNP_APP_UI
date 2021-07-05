@@ -56,7 +56,7 @@ const ModalSever = (props) => {
            visible={props.isOpen}
            >
                <View style={{width:'100%', height:'60%', alignItems:'center',backgroundColor:'#FFF', position:'absolute', bottom:0}}>
-                <View>
+                <View style={{padding:20}}>
                     <Text>Pick your Sever</Text>
                 </View>
                 <ScrollView style={{width:'100%', paddingHorizontal:30}}>

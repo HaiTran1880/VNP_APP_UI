@@ -8,7 +8,8 @@ import {
     ScrollView, 
     TouchableOpacity, 
     Dimensions,
-    useWindowDimensions
+    useWindowDimensions,
+    Platform
  } from 'react-native';
 import image from '../assets/image';
 const backgrounds=[
@@ -88,10 +89,9 @@ const WelcomView = ({ navigation }) => {
                {backgrounds.map(item=>
                <View style={{justifyContent:'space-between'}}>
                    <Image style={{width:Dimensions.get('window').width*8/10, 
-                   height:500,
-
+                   height:'80%',
                 }}
-                   resizeMode='contain'
+                   resizeMode={Platform.OS==='ios' ? 'contain' : 'contain'}
                    source={item.img}/>
                    <View style={{}}>
                    <Text style={{textAlign:'center', fontSize:20, marginBottom:17, fontWeight:'600'}}>{item.title}</Text>
